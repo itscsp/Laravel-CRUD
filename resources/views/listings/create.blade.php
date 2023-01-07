@@ -8,7 +8,7 @@
             <p class="mb-4">Post a gig to find a developer</p>
         </header>
         
-        <form method="post" action="/listings">
+        <form method="post" action="/listings" enctype="multipart/form-data">
             @csrf
             <div class="mb-6">
                 <label
@@ -17,6 +17,7 @@
                     >Company Name</label
                 >
                 <input
+                    value="{{old('company')}}"
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="company"
@@ -31,6 +32,7 @@
                     >Job Title</label
                 >
                 <input
+                value="{{old('title')}}"
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="title"
@@ -48,6 +50,7 @@
                     >Job Location</label
                 >
                 <input
+                value="{{old('location')}}"
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="location"
@@ -65,6 +68,7 @@
                     >Contact Email</label
                 >
                 <input
+                value="{{old('email')}}"
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="email"
@@ -82,6 +86,8 @@
                     Website/Application URL
                 </label>
                 <input
+                value="{{old('website')}}"
+                
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="website"
@@ -96,6 +102,8 @@
                     Tags (Comma Separated)
                 </label>
                 <input
+                value="{{old('tags')}}"
+            
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="tags"
@@ -107,7 +115,7 @@
             @enderror
             </div>
         
-            {{-- <div class="mb-6">
+            <div class="mb-6">
                 <label for="logo" class="inline-block text-lg mb-2">
                     Company Logo
                 </label>
@@ -116,7 +124,12 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="logo"
                 />
-            </div> --}}
+
+                
+                @error('logo')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
         
             <div class="mb-6">
                 <label
@@ -126,10 +139,12 @@
                     Job Description
                 </label>
                 <textarea
-                    class="border border-gray-200 rounded p-2 w-full"
-                    name="description"
-                    rows="10"
-                    placeholder="Include tasks, requirements, salary, etc"
+                
+                class="border border-gray-200 rounded p-2 w-full"
+                name="description"
+                rows="10"
+                placeholder="Include tasks, requirements, salary, etc"
+                {{old('description')}}
                 ></textarea>
 
                 @error('description')

@@ -12,8 +12,9 @@ class ListingController extends Controller
     
     // All Listings
     public function index(Request $request) {
+        // dd(Listing::latest()->filter(request(['tag', 'search']))->paginate(2) );
         return view('listings.index', [
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get() 
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(10) 
         ]);
     }
 
@@ -24,14 +25,14 @@ class ListingController extends Controller
         ]);
     }
 
-    //Show Create Form
+    //Show Create Form 
     public function create() {
         return view('listings.create');
     }
 
     // store listing data
     public function store(Request $request) {
-
+        // dd($request->file('logo')); 
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('listings', 'company')],
@@ -44,7 +45,8 @@ class ListingController extends Controller
 
         Listing::create($formFields);
 
-        return redirect('/');
+
+        return redirect('/')->with('message', 'Listing created successfully');
     }
 
 }

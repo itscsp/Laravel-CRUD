@@ -30,7 +30,7 @@ Route::post('/listings', [ListingController::class, 'store'])->middleware('auth'
 Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
 //Single Listing
-Route::get('/listings/{listing}', [ListingController::class, 'show']);
+Route::get('/listings/{listing}', [ListingController::class, 'show'])->middleware('auth');
 
 //Update Single Listing
 Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');

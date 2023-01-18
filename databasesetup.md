@@ -13,3 +13,6 @@
 
 # Crete factory
 ## php artisan make:factory ListingFactory
+
+# Create Controller
+
